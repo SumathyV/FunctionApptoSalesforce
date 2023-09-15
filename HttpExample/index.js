@@ -1,5 +1,5 @@
 const https = require("https");
-context.log("Calling using https...")
+console.log("Calling using https")
 module.exports = async function (context, req) {
   context.log("JavaScript HTTP trigger function processed a request.");
 
@@ -19,19 +19,19 @@ module.exports = async function (context, req) {
       let data = [];
       const headerDate =
       res.headers && res.headers.date ? res.headers.date : "no response date";
-      context.log("Status Code:", res.statusCode);
-      context.log("Date in Response header:", headerDate);
+      console.log("Status Code:", res.statusCode);
+      console.log("Date in Response header:", headerDate);
 
       res.on("data", (chunk) => {
         data.push(chunk);
       });
 
       res.on("end", () => {
-        context.log("Response ended: ");
+        console.log("Response ended: ");
         const users = JSON.parse(Buffer.concat(data).toString());
 
         for (user of users) {
-            context.log(`Got user with id: ${user.id}, name: ${user.name}`);
+          console.log(`Got user with id: ${user.id}, name: ${user.name}`);
         }
         context.res = {
             // status: 200, /* Defaults to 200 */
@@ -40,6 +40,6 @@ module.exports = async function (context, req) {
       });
     })
     .on("error", (err) => {
-        context.log("Error: ", err.message);
+      console.log("Error: ", err.message);
     });
 };
