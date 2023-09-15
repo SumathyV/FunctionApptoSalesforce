@@ -29,6 +29,7 @@ module.exports = async function (context, req) {
       res.on("end", () => {
         context.log("Response ended: ");
         const users = JSON.parse(Buffer.concat(data).toString());
+        context.log(users)
 
         for (user of users) {
             context.log(`Got user with id: ${user.id}, name: ${user.name}`);
