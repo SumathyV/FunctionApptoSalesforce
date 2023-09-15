@@ -15,27 +15,27 @@ module.exports = async function (context, req) {
 
   //Invoke REST API
 
-  https.get("https://jsonplaceholder.typicode.com/users", (result) => {
+  https.get("https://jsonplaceholder.typicode.com/users", (res) => {
       let data = [];
       const headerDate =
-      result.headers && result.headers.date ? result.headers.date : "no response date";
-      context.log("Status Code:", result.statusCode);
-      context.log("Date in Response header:", headerDate);
+      res.headers && res.headers.date ? res.headers.date : "no response date";
+      console.log("Status Code:", res.statusCode);
+      console.log("Date in Response header:", headerDate);
 
-      result.on("data", (chunk) => {
+      res.on("data", (chunk) => {
         data.push(chunk);
       });
 
-      result.on("end", () => {
-        context.log("Response ended: ");
+      res.on("end", () => {
+        console.log("Response ended: ");
         const users = JSON.parse(Buffer.concat(data).toString());
 
         for (user of users) {
-            context.log(`Got user with id: ${user.id}, name: ${user.name}`);
+          console.log(`Got user with id: ${user.id}, name: ${user.name}`);
         }
         context.res = {
             // status: 200, /* Defaults to 200 */
-            body: JSON.stringify(users)
+            body: data
       };
       });
     })
