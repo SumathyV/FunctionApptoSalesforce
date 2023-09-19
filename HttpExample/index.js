@@ -1,4 +1,4 @@
-const https = require("https");
+const axios = require("axios");
 console.log("Calling using https");
 module.exports = async function (context, req) {
   context.log("JavaScript HTTP trigger function processed a request.");
@@ -16,8 +16,8 @@ module.exports = async function (context, req) {
   //Invoke REST API
   context.log("STEP 1", name);
 
-  let res = await https.get("https://jsonplaceholder.typicode.com/users");
-  context.log("res==>", res);
+  let res = await axios.get("https://jsonplaceholder.typicode.com/users");
+  context.log("res==>", res.data);
   let data = [];
   const headerDate =
     res.headers && res.headers.date ? res.headers.date : "no response date";
