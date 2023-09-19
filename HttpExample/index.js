@@ -16,7 +16,7 @@ module.exports = async function (context, req) {
   //Invoke REST API
   context.log("STEP 1",name);
 
-  https.get("https://jsonplaceholder.typicode.com/users", function (res) {
+  let res = await http.get("https://jsonplaceholder.typicode.com/users");
       let data = [];
       const headerDate =
       res.headers && res.headers.date ? res.headers.date : "no response date";
@@ -38,9 +38,9 @@ module.exports = async function (context, req) {
             // status: 200, /* Defaults to 200 */
             body: data
       };
-      });
-    })
-    .on("error", (err) => {
+    });
+  //  }
+    res.on("error", (err) => {
       context.log("Error: ", err.message);
     });
 };
