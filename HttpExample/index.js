@@ -18,29 +18,8 @@ module.exports = async function (context, req) {
 
   let res = await axios.get("https://jsonplaceholder.typicode.com/users");
   context.log("res==>", res.data);
-  let data = [];
-  const headerDate =
-    res.headers && res.headers.date ? res.headers.date : "no response date";
-  context.log("Status Code:", res.statusCode);
-  context.log("Date in Response header:", headerDate);
-
-  res.on("data", (chunk) => {
-    data.push(chunk);
-  });
-
-  res.on("end", () => {
-    context.log("Response ended: ");
-    const users = JSON.parse(Buffer.concat(data).toString());
-
-    for (user of users) {
-      context.log(`Got user with id: ${user.id}, name: ${user.name}`);
-    }
-    context.res = {
-      // status: 200, /* Defaults to 200 */
-      body: data,
-    };
-  });
-  res.on("error", (err) => {
-    context.log("Error: ", err.message);
-  });
+  context.res = {
+    // status: 200, /* Defaults to 200 */
+    body: res.data,
+  };
 };
