@@ -16,7 +16,7 @@ module.exports = async function (context, req) {
   //Invoke REST API
   context.log("STEP 1",name);
 
-  let res = await http.get("https://jsonplaceholder.typicode.com/users");
+  let res = await https.get("https://jsonplaceholder.typicode.com/users");
       let data = [];
       const headerDate =
       res.headers && res.headers.date ? res.headers.date : "no response date";
