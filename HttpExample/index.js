@@ -15,13 +15,13 @@ module.exports = async function (context, req) {
 
   //Invoke REST API
   context.log("STEP 1",name);
-
+  let that = this;
   https.get("https://jsonplaceholder.typicode.com/users", (res) => {
       let data = [];
       const headerDate =
       res.headers && res.headers.date ? res.headers.date : "no response date";
-      context.log("Status Code:", res.statusCode);
-      context.log("Date in Response header:", headerDate);
+      that.context.log("Status Code:", res.statusCode);
+      that.context.log("Date in Response header:", headerDate);
 
       res.on("data", (chunk) => {
         data.push(chunk);
