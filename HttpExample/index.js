@@ -14,7 +14,7 @@ module.exports = async function (context, req) {
   //};
 
   //Invoke REST API
-  context.log("STEP 111 ==>", name);
+  context.log("STEP 111", name);
 
   let res = await axios.get("https://jsonplaceholder.typicode.com/users");
   context.log("res==>", res.data);
